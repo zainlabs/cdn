@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <script>
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+        async function Main() {
+            var files = document.getElementById("myfile").files;
+
+            if (files.length > 0) {
+
+                var formData = new FormData();
+                formData.append("file", files[0]);
+
+                var xhttp = new XMLHttpRequest();
+
+                // Set POST method and ajax file path
+                xhttp.open("POST", "index.php", true);
+
+                // call on request changes state
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        var response = this.responseText;
+                        response = JSON.parse(response);
+                        if (response.status == 1) {
+                            alert("Upload successfully.");
+                        } else {
+                            alert("File not uploaded.");
+                        }
+                    }
+                };
+
+                // Send request with data
+                xhttp.send(formData);
+
+            } else {
+                alert("Please select a file");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="file" name="myfile" id="myfile">
+    <button id="upload">Upload</button>
+
+    <script>
+        document.getElementById("upload").onclick = function () {
+            Main();
+        }
+    </script>
+</body>
+
+</html>

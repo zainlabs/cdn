@@ -1,0 +1,14 @@
+RewriteEngine On
+#IndexIgnore *
+Options -Indexes
+#RewriteRule ^([^_]*)/([^_]*)/?$ index.php?id=$1&name=$2 [L]
+RewriteRule ^([^/]*)/([^/]*)/?$ ?id=$1&name=$2 [L]
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)/?$ ?id=$1&name=$2&w=$3 [L]
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/?$ ?id=$1&name=$2&w=$3&q=$4 [L]
+#RewriteRule ^([^/]*)/([^/]*)/([^/]*)_([^/]*)/?$ ?id=$1&name=$2&w=$3&q=$4 [L]
+#RewriteRule ^([^/]*)/([^/]*)/([^/]*)-([^/]*)/?$ ?id=$1&name=$2&w=$3&h=$4 [L]
+#RewriteRule ^([^/]*)/([^/]*)/([^/]*)x([^/]*)/([^/]*)/?$ ?id=$1&name=$2&w=$3&h=$4&q=$5 [L]
+
+#ErrorDocument 403 /
+#ErrorDocument 404 /
+#ErrorDocument 500 /
